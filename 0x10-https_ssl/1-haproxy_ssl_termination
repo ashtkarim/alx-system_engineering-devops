@@ -1,0 +1,12 @@
+#--krimo.tech-params-begin--
+backend krimo.tech-backend
+    balance roundrobin
+    server 428854-web-01 54.237.32.133:80 check
+    server 428854-web-02 100.26.153.220:80 check
+
+frontend krimo.tech-frontend
+        bind *:80
+        bind *:443 ssl crt /etc/haproxy/certs/www.krimo.tech.pem
+        redirect scheme https code 301 if !{ ssl_fc }
+        default_backend krimo.tech-backend
+#--krimo.tech-params-end--
