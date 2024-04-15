@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Block all incoming traffic Except TCP PORTs: 22(SSH), 443(HTTPS/SSL), 80(HTTP)
+sudo apt -y update
+sudo apt -y install ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+sudo ufw enable
+sudo ufw status
