@@ -1,11 +1,11 @@
-# Change the OS configuration to give permision to holberton to login without no errors msgs
+# Enable the user holberton to login and open files without error.
 
-exec {"update hard limit":
-  command => "sed -i 's/^holberton hard nofile.*/holberton hard nofile 4096' /etc/security/limits.conf",
-  provider => "shell"  
+exec { 'increase-hard-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton hard/s/5/60000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
 
-exec {"update soft limit":
-  command => "sed -i 's/^holberton soft nofile.*/holberton soft nofile 4096' /etc/security/limits.conf",
-  provider => "shell"
+exec { 'increase-soft-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton soft/s/4/60000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
